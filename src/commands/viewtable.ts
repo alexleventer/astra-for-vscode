@@ -18,6 +18,14 @@ export const ViewTableCommand = async (item) => {
 }
 
 const webview = (label: string, rows: any) => {
+  const header = Object.keys(rows[0]).map(col => `<td>${col}</td>`).join("");
+
+  let tableRows = "";
+
+  for (let i = 1; i < rows.length; i++) {
+    tableRows += `<tr>${Object.values(rows[i]).map(col => `<td>${JSON.stringify(col)}</td>`).join("")}</tr>`
+  }
+
   return `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -27,9 +35,12 @@ const webview = (label: string, rows: any) => {
     </head>
     <body>
     <p><b>${label}</b></p>
-
-  
-    <p>${JSON.stringify(rows)}</p>
+    <table>
+    <tr>
+    ${header}
+    </tr>
+    ${tableRows}
+    </table>
     </body>
     </html>`;
 }
