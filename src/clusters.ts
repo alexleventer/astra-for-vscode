@@ -24,6 +24,13 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
     // Database
     const outline = [];
     const keyspaces: any = await listKeyspaces(this.token, this.context);
+    const { id } = this.context.globalState.get('astra');
+
+    outline.push({
+      label: id,
+      children: [],
+    });
+
     for (const keyspace of keyspaces.data) {
       if (!ignoreKeyspaces.includes(keyspace.name)) {
         const tables: any = await listTables(this.token, keyspace.name, this.context);
@@ -37,6 +44,7 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
               command: 'clusters.viewTable',
               title: 'View Astra table',
               arguments: [{
+                context: this.context,
                 keyspace: keyspace.name,
                 table: table,
               }],
@@ -46,7 +54,8 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
         });
 
         // Keyspace
-        outline.push({
+        // TODO: Only supports 1 db
+        outline[0].children.push({
           label: keyspace.name,
           children: tableOptions,
           iconPath: new ThemeIcon('key'),

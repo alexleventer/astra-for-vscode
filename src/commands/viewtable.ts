@@ -1,23 +1,23 @@
 import * as vscode from 'vscode';
-import Cassandra from '../astra/cassandra';
+import { getToken, searchTable } from '../astra/dataApi';
 
 export const ViewTableCommand = async (item) => {
-  const label = `${item.keyspace}: ${item.table}`;
+  const { keyspace, table, context} = item;
+  const { id, username, password, region } = context.globalState.get('astra');
+
+  const label = `${keyspace}: ${table}`;
   const panel = vscode.window.createWebviewPanel(
-    `${item.keyspace}/${item.table}`,
+    `${keyspace}/${table}`,
     label,
     vscode.ViewColumn.One,
     {}
   );
-  const client = new Cassandra({
-    username: 'test',
-    password: 'test123'
-  });
-  const results: any = await client.query(`SELECT * FROM ${item.keyspace}.${item.table}`);
-  panel.webview.html = webViewTest(label, results.rows);
+  const { authToken } = await getToken(context);
+  const rows = await searchTable(authToken, keyspace, table, context);
+  panel.webview.html = webview(label, rows);
 }
 
-const webViewTest = (label: string, rows: any) => {
+const webview = (label: string, rows: any) => {
   return `<!DOCTYPE html>
     <html lang="en">
     <head>

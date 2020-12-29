@@ -31,12 +31,11 @@
 <body>
   <script>
     const vscode = acquireVsCodeApi();
-    function saveServiceAccountCreds() {
+    function saveCreds() {
       const databaseId = document.getElementById('databaseId').value;
       const databaseRegion = document.getElementById('databaseRegion').value;
       const databaseUsername = document.getElementById('databaseUsername').value;
       const databasePassword = document.getElementById('databasePassword').value;
-      const serviceCreds = document.getElementById('serviceCreds').value;
       vscode.postMessage({
         command: 'credentials',
         body: {
@@ -44,7 +43,6 @@
           region: databaseRegion,
           username: databaseUsername,
           password: databasePassword,
-          serviceCreds: serviceCreds,
         },
       });
     }
@@ -55,8 +53,7 @@
   <input id="databaseRegion" type="text" placeholder="Database Region" /><br />
   <input id="databaseUsername" type="text" placeholder="Database Username" /><br />
   <input id="databasePassword" type="password" placeholder="Database Password" /><br />
-  <input id="serviceCreds" type="text" placeholder="Service Account Credentials" /><br />
-  <button id="submit" onclick="saveServiceAccountCreds()">Connect</button>
+  <button id="submit" onclick="saveCreds()">Connect</button>
 </body>
 
 </html>

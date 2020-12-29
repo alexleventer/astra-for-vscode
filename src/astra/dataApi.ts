@@ -1,11 +1,7 @@
 import * as vscode from 'vscode';
 import { get, post } from 'request';
-const id: string = '54bc3e1a-73d2-455a-9dd5-f45c64b7dfad';
-const region: string = 'us-east1';
-const username: string = 'test';
-const password: string = 'test1234';
 
-export const getToken = async (context: vscode.ExtensionContext) => {
+export const getToken = async (context: vscode.ExtensionContext): Promise<{authToken: string}> => {
   const { id, region, username, password }: any = await context.globalState.get('astra');
   return new Promise((resolve, reject) => {
     post(`https://${id}-${region}.apps.astra.datastax.com/api/rest/v1/auth`, {
@@ -48,6 +44,23 @@ export const listTables = async (token: string, keyspaceName: string, context: v
   const { id, region, username, password }: any = await context.globalState.get('astra');
   return new Promise((resolve, reject) => {
     get(`https://${id}-${region}.apps.astra.datastax.com/api/rest/v1/keyspaces/${keyspaceName}/tables`, {
+      headers: {
+        'X-Cassandra-Token': token,
+        'content-type': 'application/json'
+      }
+    }, (error, response, body) => {
+      if (error) {
+        reject(error);
+      }
+      resolve(JSON.parse(body));
+    })
+  });
+};
+
+export const searchTable = async (token: string, keyspaceName: string, tableName: string, context: vscode.ExtensionContext) => {
+  const { id, region }: any = await context.globalState.get('astra');
+  return new Promise((resolve, reject) => {
+    get(`https://${id}-${region}.apps.astra.datastax.com/api/rest/v2/keyspaces/${keyspaceName}/${tableName}?raw=true&where=${JSON.stringify({$exists: {}})}`, {
       headers: {
         'X-Cassandra-Token': token,
         'content-type': 'application/json'

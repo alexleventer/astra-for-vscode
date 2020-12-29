@@ -5,7 +5,7 @@ import { getToken } from './astra/dataApi';
 import { ClustersProvider } from './clusters';
 import * as path from 'path';
 import * as fs from 'fs';
-import { ViewTableCommand } from './commands/viewtable';
+import { ViewTableCommand } from './commands/viewTable';
 
 export async function activate(context: vscode.ExtensionContext) {
   const astraStorage: any = context.globalState.get('astra');
@@ -24,7 +24,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand('astra.start', async () => {
-      const panel = vscode.window.createWebviewPanel('astra', 'Connect to Astra', vscode.ViewColumn.One, {
+      const panel: vscode.WebviewPanel = vscode.window.createWebviewPanel('astra', 'Connect to Astra', vscode.ViewColumn.One, {
         enableScripts: true
       });
       panel.webview.onDidReceiveMessage(async message => {
