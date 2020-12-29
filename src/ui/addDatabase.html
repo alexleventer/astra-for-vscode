@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect to Astra</title>
+  <style>
+    input {
+      margin: 8px 0px;
+      padding: 5px 10px;
+      width: 300px;
+      border: 0px;
+    }
+
+    button {
+      background: #24598E;
+      color: #fff;
+      margin: 10px 0 0 0;
+      padding: 12px;
+      border: 0px;
+      outline: none;
+    }
+
+    button:hover {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    const vscode = acquireVsCodeApi();
+    function saveServiceAccountCreds() {
+      const databaseId = document.getElementById('databaseId').value;
+      const databaseRegion = document.getElementById('databaseRegion').value;
+      const databaseUsername = document.getElementById('databaseUsername').value;
+      const databasePassword = document.getElementById('databasePassword').value;
+      const serviceCreds = document.getElementById('serviceCreds').value;
+      vscode.postMessage({
+        command: 'credentials',
+        body: {
+          id: databaseId,
+          region: databaseRegion,
+          username: databaseUsername,
+          password: databasePassword,
+          serviceCreds: serviceCreds,
+        },
+      });
+    }
+  </script>
+  <h1>Connect to Astra</h1>
+  <p>Enter your database credentials to connect to your DataStax Astra account.</p>
+  <input id="databaseId" type="text" placeholder="Database Id" /><br />
+  <input id="databaseRegion" type="text" placeholder="Database Region" /><br />
+  <input id="databaseUsername" type="text" placeholder="Database Username" /><br />
+  <input id="databasePassword" type="password" placeholder="Database Password" /><br />
+  <input id="serviceCreds" type="text" placeholder="Service Account Credentials" /><br />
+  <button id="submit" onclick="saveServiceAccountCreds()">Connect</button>
+</body>
+
+</html>
