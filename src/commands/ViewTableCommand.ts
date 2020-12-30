@@ -23,7 +23,7 @@ const webview = (label: string, rows: any) => {
   let tableRows: string = "";
 
   for (let i = 1; i < rows.length; i++) {
-    tableRows += `<tr>${Object.values(rows[i]).map(col => `<td>${JSON.stringify(col)}</td>`).join("")}</tr>`
+    tableRows += `<tr>${Object.values(rows[i]).map(col => `<td>${typeof col === 'object' ? JSON.stringify(col) : col }</td>`).join("")}</tr>`
   }
 
   return `<!DOCTYPE html>

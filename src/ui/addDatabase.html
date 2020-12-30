@@ -25,6 +25,16 @@
     button:hover {
       cursor: pointer;
     }
+
+    .connect {
+      margin: 0 auto;
+      width: 80%;
+      text-align: center;
+    }
+
+    .header {
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -44,16 +54,20 @@
           username: databaseUsername,
           password: databasePassword,
         },
-      });
+      })
     }
   </script>
-  <h1>Connect to Astra</h1>
-  <p>Enter your database credentials to connect to your DataStax Astra account.</p>
-  <input id="databaseId" type="text" placeholder="Database Id" /><br />
-  <input id="databaseRegion" type="text" placeholder="Database Region" /><br />
-  <input id="databaseUsername" type="text" placeholder="Database Username" /><br />
-  <input id="databasePassword" type="password" placeholder="Database Password" /><br />
-  <button id="submit" onclick="saveCreds()">Connect</button>
+  <div class="header">
+  </div>
+  <hr>
+  <div class="connect">
+    <h1>Connect to Astra</h1>
+    <p>Enter your database credentials to connect to your DataStax Astra account.</p>
+    <input id="databaseId" type="text" placeholder="Database Id" /><br />
+    <input id="databaseRegion" type="text" placeholder="Database Region" /><br />
+    <input id="databaseUsername" type="text" placeholder="Database Username" /><br />
+    <input id="databasePassword" type="password" placeholder="Database Password" /><br />
+    <button id="submit" onclick="saveCreds()">Connect</button>
+  </div>
 </body>
-
 </html>

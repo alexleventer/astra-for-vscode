@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { ThemeIcon } from 'vscode';
-import { listKeyspaces, listTables } from './astra/dataApi';
+import { listKeyspaces, listTables } from '../astra/dataApi';
 
 export class ClustersProvider implements vscode.TreeDataProvider<any> {
   private outline: any;
