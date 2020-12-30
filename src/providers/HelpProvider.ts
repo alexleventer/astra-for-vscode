@@ -10,8 +10,9 @@ export class HelpProvider implements vscode.TreeDataProvider<any> {
   async generateOutline() {
     return [
       {
-        label: "Documentation",
+        label: "Astra Documentation",
         children: [],
+        iconPath: new vscode.ThemeIcon('book'),
         command: {
           command: 'astra.openDocumentation',
         },
@@ -19,13 +20,15 @@ export class HelpProvider implements vscode.TreeDataProvider<any> {
       {
         label: "Astra Portal",
         children: [],
+        iconPath: new vscode.ThemeIcon('code'),
         command: {
           command: 'astra.openPortal',
         },
       },
       {
-        label: "Example Apps",
+        label: "Astra Example Apps",
         children: [],
+        iconPath: new vscode.ThemeIcon('briefcase'),
         command: {
           command: 'astra.openSampleAppGallery',
         },

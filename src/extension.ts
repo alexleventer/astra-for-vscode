@@ -35,7 +35,7 @@ export async function validateInput(body) {
     errors.push('Missing database password.');
   }
 
-  if (!errors) {
+  if (errors && errors.length === 0) {
     return true;
   }
   vscode.window.showErrorMessage(`ERROR: ${errors.join('\n')}`);
@@ -44,7 +44,6 @@ export async function validateInput(body) {
 
 export async function activate(context: vscode.ExtensionContext) {
   const astraStorage: any = context.globalState.get('astra');
-  await context.globalState.update('astra', null); // TODO: remove
   const helpProvider = new HelpProvider(context);
   vscode.window.registerTreeDataProvider('help', helpProvider);
   vscode.window.createTreeView('help', {treeDataProvider: helpProvider});
