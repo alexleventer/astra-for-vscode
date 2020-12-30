@@ -30,6 +30,14 @@
 				}
 			]
 		},
+		"menus": {
+			"view/item/context": [
+				{
+					"command": "clusters.deleteEntry",
+					"when": "view == clusters && viewItem == cluster"
+				}
+			]
+		},
 		"views": {
 			"package-explorer": [
 				{
@@ -46,6 +54,10 @@
 			{
 				"command": "astra.start",
 				"title": "Start Astra for VS Code"
+			},
+			{
+				"command": "clusters.deleteEntry",
+				"title": "Delete"
 			}
 		]
 	},

@@ -7,8 +7,7 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
   constructor(private token: string, private context: vscode.ExtensionContext) {
     this.token = token;
     this.context = context;
-    const outline = this.generateOutline();
-    this.outline = outline;
+    this.outline = this.generateOutline();
   }
 
   async generateOutline() {
@@ -23,11 +22,14 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
     ];
     // Database
     const outline = [];
-    const keyspaces: any = await listKeyspaces(this.token, this.context);
-    const { id } = this.context.globalState.get('astra');
+    const context: any = this.context.globalState.get('astra');
+
+    if (this.token && context && context.id) {
+      const keyspaces: any = await listKeyspaces(this.token, this.context);
 
     outline.push({
-      label: id,
+      label: context?.id,
+      contextValue: "cluster",
       children: [],
     });
 
@@ -62,6 +64,7 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
         });
       }
     }
+    }
     return outline;
   }
 
@@ -84,5 +87,9 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
       return Promise.resolve(element.children);
     }
     return Promise.resolve(this.outline);
+  }
+
+  async refresh(): Promise<void> {
+    this.outline = await this.generateOutline()
   }
 }
