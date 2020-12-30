@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { getToken } from './astra/dataApi';
-import { ClustersProvider } from './providers/clusters';
+import { ClustersProvider } from './providers/ClustersProvider';
+import { HelpProvider } from './providers/HelpProvider';
 import * as path from 'path';
 import * as fs from 'fs';
 import { ViewTableCommand } from './commands/ViewTableCommand';
@@ -34,7 +35,7 @@ export async function validateInput(body) {
     errors.push('Missing database password.');
   }
 
-  if (errors.length === 0) {
+  if (!errors) {
     return true;
   }
   vscode.window.showErrorMessage(`ERROR: ${errors.join('\n')}`);
@@ -44,12 +45,24 @@ export async function validateInput(body) {
 export async function activate(context: vscode.ExtensionContext) {
   const astraStorage: any = context.globalState.get('astra');
   await context.globalState.update('astra', null); // TODO: remove
+  const helpProvider = new HelpProvider(context);
+  vscode.window.registerTreeDataProvider('help', helpProvider);
+  vscode.window.createTreeView('help', {treeDataProvider: helpProvider});
 
   if (astraStorage && astraStorage.id) {
     await setUpTreeView(context);
   }
 
   context.subscriptions.push(
+    vscode.commands.registerCommand('astra.openSampleAppGallery', async () => {
+      vscode.env.openExternal(vscode.Uri.parse("https://www.datastax.com/examples"));
+    }),
+    vscode.commands.registerCommand('astra.openPortal', async () => {
+      vscode.env.openExternal(vscode.Uri.parse("https://astra.datastax.com"));
+    }),
+    vscode.commands.registerCommand('astra.openDocumentation', async () => {
+      vscode.env.openExternal(vscode.Uri.parse("https://docs.astra.datastax.com"));
+    }),
     vscode.commands.registerCommand('astra.start', async () => {
       const panel: vscode.WebviewPanel = vscode.window.createWebviewPanel('astra', 'Connect to Astra', vscode.ViewColumn.One, {
         enableScripts: true,

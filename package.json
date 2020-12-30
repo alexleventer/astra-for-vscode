@@ -11,6 +11,7 @@
 	},
 	"activationEvents": [
 		"onView:clusters",
+		"onView:help",
 		"onWebviewPanel:astra"
 	],
 	"main": "./out/extension.js",
@@ -58,6 +59,18 @@
 			{
 				"command": "clusters.deleteEntry",
 				"title": "Delete"
+			},
+			{
+				"command": "astra.openSampleAppGallery",
+				"title": "Open Sample App Gallery"
+			},
+			{
+				"command": "astra.openPortal",
+				"title": "Open the Astra Portal"
+			},
+			{
+				"command": "astra.openDocumentation",
+				"title": "Open Astra Documentation"
 			}
 		]
 	},
