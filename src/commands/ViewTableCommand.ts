@@ -5,8 +5,8 @@ export const ViewTableCommand = async (item) => {
   const { keyspace, table, context} = item;
   const { id, username, password, region } = context.globalState.get('astra');
 
-  const label = `${keyspace}: ${table}`;
-  const panel = vscode.window.createWebviewPanel(
+  const label: string = `${keyspace}: ${table}`;
+  const panel: vscode.WebviewPanel = vscode.window.createWebviewPanel(
     `${keyspace}/${table}`,
     label,
     vscode.ViewColumn.One,
@@ -18,7 +18,7 @@ export const ViewTableCommand = async (item) => {
 }
 
 const webview = (label: string, rows: any) => {
-  const header = `<tr>${Object.keys(rows[0]).map(col => `<td><b>${col}<b></td>`).join("")}</tr>`;
+  const header: string = `<tr>${Object.keys(rows[0]).map(col => `<td><b>${col}<b></td>`).join("")}</tr>`;
 
   let tableRows: string = "";
 
