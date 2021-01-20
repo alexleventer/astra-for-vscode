@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { getToken } from './astra/dataApi';
 import { ClustersProvider } from './providers/ClustersProvider';
 import { HelpProvider } from './providers/HelpProvider';
 import * as path from 'path';
@@ -7,14 +8,15 @@ import { pythonExample, javascriptExample } from './astra/examples';
 import { ViewTableCommand } from './commands/ViewTableCommand';
 
 export async function setUpTreeView(context: vscode.ExtensionContext) {
-  const clusterProvider = new ClustersProvider(context);
-  vscode.window.registerTreeDataProvider('clusters', clusterProvider);
-  vscode.window.createTreeView('clusters', {treeDataProvider: clusterProvider});
-  vscode.commands.registerCommand('clusters.viewTable', ViewTableCommand);
-  vscode.commands.registerCommand('clusters.deleteEntry', async (item) => {
-    await context.globalState.update('astra', null);
-    await clusterProvider.refresh();
-  });
+  const { authToken }: any = await getToken(context);
+    const clusterProvider = new ClustersProvider(authToken, context);
+    vscode.window.registerTreeDataProvider('clusters', clusterProvider);
+    vscode.window.createTreeView('clusters', {treeDataProvider: clusterProvider});
+    vscode.commands.registerCommand('clusters.viewTable', ViewTableCommand);
+    vscode.commands.registerCommand('clusters.deleteEntry', async (item) => {
+      await context.globalState.update('astra', null);
+      await clusterProvider.refresh();
+    });
 };
 
 export async function validateInput(body) {

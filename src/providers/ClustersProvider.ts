@@ -1,10 +1,11 @@
 import * as vscode from 'vscode';
 import { ThemeIcon } from 'vscode';
-import { getToken, listKeyspaces, listTables } from '../astra/dataApi';
+import { listKeyspaces, listTables } from '../astra/dataApi';
 
 export class ClustersProvider implements vscode.TreeDataProvider<any> {
   private outline: any;
-  constructor(private context: vscode.ExtensionContext) {
+  constructor(private token: string, private context: vscode.ExtensionContext) {
+    this.token = token;
     this.context = context;
     this.outline = this.generateOutline();
   }
@@ -21,21 +22,20 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
     ];
     // Database
     const outline = [];
-    const context: any = this.context.globalState?.get('astra');
+    const context: any = this.context.globalState.get('astra');
 
-    if (context && context?.id) {
-      const { authToken }: {authToken: string} = await getToken(context);
-      const keyspaces: any = await listKeyspaces(authToken, this.context);
+    if (this.token && context && context.id) {
+      const keyspaces: any = await listKeyspaces(this.token, this.context);
 
     outline.push({
       label: context?.id,
-      contextValue: 'cluster',
+      contextValue: "cluster",
       children: [],
     });
 
     for (const keyspace of keyspaces.data) {
       if (!ignoreKeyspaces.includes(keyspace.name)) {
-        const tables: any = await listTables(authToken, keyspace.name, this.context);
+        const tables: any = await listTables(this.token, keyspace.name, this.context);
 
         // Tables
         const tableOptions: any = await tables.map(table => {
@@ -55,6 +55,7 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
           }
         });
 
+        // Keyspace
         // TODO: Only supports 1 db
         outline[0].children.push({
           label: keyspace.name,
