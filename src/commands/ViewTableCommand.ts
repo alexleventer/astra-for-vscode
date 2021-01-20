@@ -18,12 +18,22 @@ export const ViewTableCommand = async (item) => {
 }
 
 const webview = (label: string, rows: any) => {
-  const header: string = `<tr>${Object.keys(rows[0]).map(col => `<td><b>${col}<b></td>`).join("")}</tr>`;
 
-  let tableRows: string = "";
+  let table: string
+  if (rows.length > 0) {
+    const header: string = `<tr>${Object.keys(rows[0]).map(col => `<td><b>${col}<b></td>`).join("")}</tr>`;
 
-  for (let i = 1; i < rows.length; i++) {
-    tableRows += `<tr>${Object.values(rows[i]).map(col => `<td>${typeof col === 'object' ? JSON.stringify(col) : col }</td>`).join("")}</tr>`
+    let tableRows: string = "";
+
+    for (let i = 1; i < rows.length; i++) {
+      tableRows += `<tr>${Object.values(rows[i]).map(col => `<td>${typeof col === 'object' ? JSON.stringify(col) : col}</td>`).join("")}</tr>`
+    }
+
+    table = `
+      <table>
+      ${header}
+      ${tableRows}
+      </table>`
   }
 
   return `<!DOCTYPE html>
@@ -35,10 +45,7 @@ const webview = (label: string, rows: any) => {
     </head>
     <body>
     <h3><b>${label}</b></h3>
-    <table>
-    ${header}
-    ${tableRows}
-    </table>
+    ${table || "<span>no rows</span>"}
     </body>
     </html>`;
 }
