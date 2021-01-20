@@ -4,6 +4,7 @@ import { ClustersProvider } from './providers/ClustersProvider';
 import { HelpProvider } from './providers/HelpProvider';
 import * as path from 'path';
 import * as fs from 'fs';
+import { pythonExample, javascriptExample } from './astra/examples';
 import { ViewTableCommand } from './commands/ViewTableCommand';
 
 export async function setUpTreeView(context: vscode.ExtensionContext) {
@@ -53,15 +54,11 @@ export async function activate(context: vscode.ExtensionContext) {
   }
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('astra.openSampleAppGallery', async () => {
-      vscode.env.openExternal(vscode.Uri.parse("https://www.datastax.com/examples"));
-    }),
-    vscode.commands.registerCommand('astra.openPortal', async () => {
-      vscode.env.openExternal(vscode.Uri.parse("https://astra.datastax.com"));
-    }),
-    vscode.commands.registerCommand('astra.openDocumentation', async () => {
-      vscode.env.openExternal(vscode.Uri.parse("https://docs.astra.datastax.com"));
-    }),
+    vscode.commands.registerCommand('astra.openSampleAppGallery', async () => vscode.env.openExternal(vscode.Uri.parse("https://www.datastax.com/examples"))),
+    vscode.commands.registerCommand('astra.openPortal', async () => vscode.env.openExternal(vscode.Uri.parse("https://astra.datastax.com"))),
+    vscode.commands.registerCommand('astra.openDocumentation', async () => vscode.env.openExternal(vscode.Uri.parse("https://docs.astra.datastax.com"))),
+    vscode.commands.registerCommand('astra.launchNodeExample', async () => vscode.workspace.openTextDocument({content: javascriptExample, language: 'javascript'})),
+    vscode.commands.registerCommand('astra.launchPythonExample', async () => vscode.workspace.openTextDocument({content: pythonExample, language: 'python'})),
     vscode.commands.registerCommand('astra.start', async () => {
       const panel: vscode.WebviewPanel = vscode.window.createWebviewPanel('astra', 'Connect to Astra', vscode.ViewColumn.One, {
         enableScripts: true,

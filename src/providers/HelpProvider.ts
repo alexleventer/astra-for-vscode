@@ -20,18 +20,30 @@ export class HelpProvider implements vscode.TreeDataProvider<any> {
       {
         label: "Astra Portal",
         children: [],
-        iconPath: new vscode.ThemeIcon('code'),
+        iconPath: new vscode.ThemeIcon('briefcase'),
         command: {
           command: 'astra.openPortal',
         },
       },
       {
-        label: "Astra Example Apps",
-        children: [],
-        iconPath: new vscode.ThemeIcon('briefcase'),
-        command: {
-          command: 'astra.openSampleAppGallery',
-        },
+        label: "Launch an Example",
+        children: [
+          {
+            label: "Node.js Example",
+            children: [],
+            command: {
+              command: 'astra.launchNodeExample',
+            },
+          },
+          {
+            label: "Python Example",
+            children: [],
+            command: {
+              command: 'astra.launchPythonExample',
+            },
+          },
+        ],
+        iconPath: new vscode.ThemeIcon('code'),
       }
     ];
 

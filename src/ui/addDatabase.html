@@ -22,28 +22,23 @@
       box-sizing: border-box;
       padding-left: 10px;
     }
-
     input[type="password"] {
       box-sizing: border-box;
       padding-left: 10px;
     }
-
     button:hover {
       cursor: pointer;
     }
-
     .connect {
       margin: 0 auto;
       max-width: 500px;
       text-align: center;
     }
-
     .header {
       text-align: center;
       margin-top: 100px;
       padding: 20px 0 10px 0;
     }
-
     #submit {
       max-width: 100%;
       width: 100%;
@@ -59,7 +54,6 @@
     }
   </style>
 </head>
-
 <body>
   <script>
     const vscode = acquireVsCodeApi();
@@ -70,7 +64,7 @@
       const databasePassword = document.getElementById('databasePassword').value;
       vscode.postMessage({
         command: 'credentials',
-        body: {
+        body: { 
           id: databaseId,
           region: databaseRegion,
           username: databaseUsername,
