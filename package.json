@@ -47,7 +47,7 @@
 				},
 				{
 					"id": "help",
-					"name": "Help and Feedback"
+					"name": "Help"
 				}
 			]
 		},
@@ -71,6 +71,14 @@
 			{
 				"command": "astra.openDocumentation",
 				"title": "Open Astra Documentation"
+			},
+			{
+				"command": "astra.launchNodeExample",
+				"title": "Launch Node.js Example"
+			},
+			{
+				"command": "astra.launchPythonExample",
+				"title": "Launch Python Example"
 			}
 		]
 	},
