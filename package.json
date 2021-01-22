@@ -36,6 +36,10 @@
 				{
 					"command": "clusters.deleteEntry",
 					"when": "view == clusters && viewItem == cluster"
+				},
+				{
+					"command": "astra.loadCSV",
+					"when": "viewItem == keyspace"
 				}
 			]
 		},
@@ -58,7 +62,7 @@
 			},
 			{
 				"command": "clusters.deleteEntry",
-				"title": "Delete"
+				"title": "remove"
 			},
 			{
 				"command": "astra.openSampleAppGallery",
@@ -79,6 +83,10 @@
 			{
 				"command": "astra.launchPythonExample",
 				"title": "Launch Python Example"
+			},
+			{
+				"command": "astra.loadCSV",
+				"title": "Load CSV"
 			}
 		]
 	},
@@ -105,6 +113,7 @@
 		"jsonc-parser": "^3.0.0",
 		"minimist": "^1.2.5",
 		"mkdirp": "^1.0.4",
+		"node-fetch": "^2.6.1",
 		"request": "^2.88.2",
 		"rimraf": "^3.0.2"
 	}

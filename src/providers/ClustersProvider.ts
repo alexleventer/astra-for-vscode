@@ -13,6 +13,7 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
   async generateOutline() {
     const ignoreKeyspaces: string[] = [
       'system',
+      'system_schema',
       'system_backups',
       'system_distributed',
       'system_auth',
@@ -42,6 +43,7 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
           return {
             label: table,
             iconPath: new ThemeIcon('split-horizontal'),
+            contextValue: "table",
             command: {
               command: 'clusters.viewTable',
               title: 'View Astra table',
@@ -59,6 +61,9 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
         // TODO: Only supports 1 db
         outline[0].children.push({
           label: keyspace.name,
+          keyspace: keyspace.name,
+          database: context.id,
+          contextValue: "keyspace",
           children: tableOptions,
           iconPath: new ThemeIcon('key'),
         });
