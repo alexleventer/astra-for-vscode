@@ -86,8 +86,7 @@
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"lint": "eslint . --ext .ts,.tsx"
+		"watch": "tsc -watch -p ./"
 	},
 	"devDependencies": {
 		"@types/mkdirp": "^1.0.1",
