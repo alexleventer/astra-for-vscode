@@ -4,19 +4,16 @@
 	"description": "Astra for VS Code Plugin",
 	"version": "0.2.1",
 	"publisher": "datastax",
+	"author": {
+		"name": "DataStax"
+	},
+	"icon": "https://astra.datastax.com/static/media/logo-new.e23ff57e.svg",
 	"license": "MIT",
 	"repository": "https://github.com/alexleventer/astra-for-vscode",
 	"enableProposedApi": false,
 	"engines": {
 		"vscode": "^1.52.0"
 	},
-	"badges": [
-		{
-			"url": "https://www.datastax.com/favicon.ico",
-			"href": "https://astra.datastax.com",
-			"description": "DataStax Astra"
-		}
-	],
 	"activationEvents": [
 		"onView:clusters",
 		"onView:help",
