@@ -3,7 +3,7 @@
 	"displayName": "Astra for VS Code",
 	"description": "Astra for VS Code Plugin",
 	"version": "1.0.0",
-	"publisher": "Alex Leventer",
+	"publisher": "DataStax",
 	"license": "MIT",
 	"enableProposedApi": true,
 	"engines": {
