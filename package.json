@@ -11,6 +11,7 @@
 		"color": "#43434d",
 		"theme": "dark"
 	},
+	"preview": true,
 	"icon": "logo.png",
 	"license": "MIT",
 	"repository": "https://github.com/alexleventer/astra-for-vscode",
