@@ -1,11 +1,15 @@
 {
 	"name": "astra-for-vs-code",
 	"displayName": "Astra for VS Code (Beta)",
-	"description": "Astra for VS Code Plugin",
+	"description": "DataStax Astra Cassandra-as-a-Service: Open, multi-cloud stack for modern data apps",
 	"version": "0.2.2",
 	"publisher": "datastax",
 	"author": {
 		"name": "DataStax"
+	},
+	"galleryBanner": {
+		"color": "#E76235",
+		"theme": "dark"
 	},
 	"icon": "logo.png",
 	"license": "MIT",
@@ -14,6 +18,15 @@
 	"engines": {
 		"vscode": "^1.52.0"
 	},
+	"categories": [
+		"Programming Languages",
+		"Snippets"
+	],
+	"keywords": [
+		"cassandra",
+		"database",
+		"datastax astra"
+	],
 	"activationEvents": [
 		"onView:clusters",
 		"onView:help",
