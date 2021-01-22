@@ -5,7 +5,8 @@
 	"version": "1.2.0",
 	"publisher": "datastax",
 	"license": "MIT",
-	"enableProposedApi": true,
+	"repository": "https://github.com/alexleventer/astra-for-vscode",
+	"enableProposedApi": false,
 	"engines": {
 		"vscode": "^1.52.0"
 	},
