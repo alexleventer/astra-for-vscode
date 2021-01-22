@@ -10,6 +10,13 @@
 	"engines": {
 		"vscode": "^1.52.0"
 	},
+	"badges": [
+		{
+			"url": "https://www.datastax.com/favicon.ico",
+			"href": "https://astra.datastax.com",
+			"description": "DataStax Astra"
+		}
+	],
 	"activationEvents": [
 		"onView:clusters",
 		"onView:help",
