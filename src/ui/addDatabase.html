@@ -1,88 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DataStax AstraDB</title>
+    <style>
+      input {
+        margin: 8px 0px;
+        width: 100%;
+        max-width: 100%;
+        color: #ffffff;
+        padding: 12px 0px;
+        border-radius: 4px;
+        border: 0px;
+        background: #3c3c3c;
+        float: left;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DataStax AstraDB</title>
-  <style>
-    input {
-      margin: 8px 0px;
-      width: 100%;
-      max-width: 100%;
-      color: #FFFFFF;
-      padding: 12px 0px;
-      border-radius: 4px;
-      border: 0px;
-      background: #3C3C3C;
-      float: left;
-    }
-
-    input[type="text"] {
-      box-sizing: border-box;
-      padding-left: 10px;
-    }
-    input[type="password"] {
-      box-sizing: border-box;
-      padding-left: 10px;
-    }
-    button:hover {
-      cursor: pointer;
-    }
-    .connect {
-      margin: 0 auto;
-      max-width: 500px;
-      text-align: center;
-    }
-    .header {
-      text-align: center;
-      margin-top: 100px;
-      padding: 20px 0 10px 0;
-    }
-    #submit {
-      max-width: 100%;
-      width: 100%;
-      font-weight: 600;
-      margin: 8px 0px;
-      background: #1E71D4;
-      border-radius: 6px;
-      color: #FFFFFF;
-      margin: 10px 0 0 0;
-      padding: 12px 5px;
-      border: 0px;
-      outline: none;
-    }
-  </style>
-</head>
-<body>
-  <script>
-    const vscode = acquireVsCodeApi();
-    function saveCreds() {
-      const databaseId = document.getElementById('databaseId').value;
-      const databaseRegion = document.getElementById('databaseRegion').value;
-      const databaseUsername = document.getElementById('databaseUsername').value;
-      const databasePassword = document.getElementById('databasePassword').value;
-      vscode.postMessage({
-        command: 'credentials',
-        body: { 
-          id: databaseId,
-          region: databaseRegion,
-          username: databaseUsername,
-          password: databasePassword,
-        },
-      })
-    }
-  </script>
-  <div class="header">
-    <img src="https://astra.datastax.com/static/media/logo-new.e23ff57e.svg"/>
-  </div>
-  <div class="connect">
-    <p>Enter your database credentials to connect to your DataStax Astra database.</p>
-    <input class="field" id="databaseId" type="text" placeholder="Database Id" /><br />
-    <input class="field" id="databaseRegion" type="text" placeholder="Database Region" /><br />
-    <input class="field" id="databaseUsername" type="text" placeholder="Database Username" /><br />
-    <input class="field" id="databasePassword" type="password" placeholder="Database Password" /><br />
-    <button id="submit" onclick="saveCreds()"><b>Connect</button>
-  </div>
-</body>
+      input[type="text"] {
+        box-sizing: border-box;
+        padding-left: 10px;
+      }
+      input[type="password"] {
+        box-sizing: border-box;
+        padding-left: 10px;
+      }
+      button:hover {
+        cursor: pointer;
+      }
+      .connect {
+        margin: 0 auto;
+        max-width: 500px;
+        text-align: center;
+      }
+      .header {
+        text-align: center;
+        margin-top: 100px;
+        padding: 20px 0 10px 0;
+      }
+      #submit {
+        max-width: 100%;
+        width: 100%;
+        font-weight: 600;
+        margin: 8px 0px;
+        background: #1e71d4;
+        border-radius: 6px;
+        color: #ffffff;
+        margin: 10px 0 0 0;
+        padding: 12px 5px;
+        border: 0px;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      const vscode = acquireVsCodeApi();
+      function saveCreds() {
+        const databaseId = document.getElementById("databaseId").value;
+        const databaseRegion = document.getElementById("databaseRegion").value;
+        const databaseUsername = document.getElementById("databaseUsername")
+          .value;
+        const databasePassword = document.getElementById("databasePassword")
+          .value;
+        vscode.postMessage({
+          command: "credentials",
+          body: {
+            id: databaseId,
+            region: databaseRegion,
+            username: databaseUsername,
+            password: databasePassword,
+          },
+        });
+      }
+    </script>
+    <div class="header">
+      <img
+        src="https://astra.datastax.com/static/media/logo-new.e23ff57e.svg"
+      />
+    </div>
+    <div class="connect">
+      <p>
+        Enter your database credentials to connect to your DataStax Astra
+        database.
+      </p>
+      <input
+        class="field"
+        id="databaseId"
+        type="text"
+        placeholder="Database Id"
+      /><br />
+      <input
+        class="field"
+        id="databaseRegion"
+        type="text"
+        placeholder="Database Region"
+      /><br />
+      <input
+        class="field"
+        id="databaseUsername"
+        type="text"
+        placeholder="Database Username"
+      /><br />
+      <input
+        class="field"
+        id="databasePassword"
+        type="password"
+        placeholder="Database Password"
+      /><br />
+      <button id="submit" onclick="saveCreds()">Connect</button>
+    </div>
+  </body>
 </html>

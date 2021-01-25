@@ -1,4 +1,4 @@
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
 
 export class HelpProvider implements vscode.TreeDataProvider<any> {
   private outline: any;
@@ -12,17 +12,17 @@ export class HelpProvider implements vscode.TreeDataProvider<any> {
       {
         label: "Astra Documentation",
         children: [],
-        iconPath: new vscode.ThemeIcon('book'),
+        iconPath: new vscode.ThemeIcon("book"),
         command: {
-          command: 'astra.openDocumentation',
+          command: "astra.openDocumentation",
         },
       },
       {
         label: "Astra Portal",
         children: [],
-        iconPath: new vscode.ThemeIcon('briefcase'),
+        iconPath: new vscode.ThemeIcon("briefcase"),
         command: {
-          command: 'astra.openPortal',
+          command: "astra.openPortal",
         },
       },
       {
@@ -32,21 +32,20 @@ export class HelpProvider implements vscode.TreeDataProvider<any> {
             label: "Node.js Example",
             children: [],
             command: {
-              command: 'astra.launchNodeExample',
+              command: "astra.launchNodeExample",
             },
           },
           {
             label: "Python Example",
             children: [],
             command: {
-              command: 'astra.launchPythonExample',
+              command: "astra.launchPythonExample",
             },
           },
         ],
-        iconPath: new vscode.ThemeIcon('code'),
-      }
+        iconPath: new vscode.ThemeIcon("code"),
+      },
     ];
-
   }
 
   getTreeItem(item: any): vscode.TreeItem {
@@ -59,7 +58,10 @@ export class HelpProvider implements vscode.TreeDataProvider<any> {
       resourceUri: item.resourceUri,
       tooltip: item.tooltip,
       contextValue: item.contextValue,
-      collapsibleState: item.children.length > 0 ? vscode.TreeItemCollapsibleState.Collapsed : vscode.TreeItemCollapsibleState.None
+      collapsibleState:
+        item.children.length > 0
+          ? vscode.TreeItemCollapsibleState.Collapsed
+          : vscode.TreeItemCollapsibleState.None,
     };
   }
 

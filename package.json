@@ -1,131 +1,132 @@
 {
-	"name": "astra-for-vs-code",
-	"displayName": "Astra for VS Code (Beta)",
-	"description": "DataStax Astra Cassandra-as-a-Service: Open, multi-cloud stack for modern data apps",
-	"version": "0.2.5",
-	"publisher": "datastax",
-	"author": {
-		"name": "DataStax"
-	},
-	"galleryBanner": {
-		"color": "#43434d",
-		"theme": "dark"
-	},
-	"preview": true,
-	"icon": "logo.png",
-	"license": "MIT",
-	"repository": "https://github.com/alexleventer/astra-for-vscode",
-	"enableProposedApi": false,
-	"engines": {
-		"vscode": "^1.52.0"
-	},
-	"categories": [
-		"Programming Languages",
-		"Snippets"
-	],
-	"keywords": [
-		"cassandra",
-		"database",
-		"datastax astra"
-	],
-	"activationEvents": [
-		"onView:clusters",
-		"onView:help",
-		"onWebviewPanel:astra"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"viewsWelcome": [
-			{
-				"view": "clusters",
-				"contents": "No Astra connections.\n[Add Connection](command:astra.start)"
-			}
-		],
-		"viewsContainers": {
-			"activitybar": [
-				{
-					"id": "package-explorer",
-					"title": "DataStax Astra",
-					"icon": "media/datastax-square.svg"
-				}
-			]
-		},
-		"menus": {
-			"view/item/context": [
-				{
-					"command": "clusters.deleteEntry",
-					"when": "view == clusters && viewItem == cluster"
-				}
-			]
-		},
-		"views": {
-			"package-explorer": [
-				{
-					"id": "clusters",
-					"name": "Clusters"
-				},
-				{
-					"id": "help",
-					"name": "Help"
-				}
-			]
-		},
-		"commands": [
-			{
-				"command": "astra.start",
-				"title": "Start Astra for VS Code"
-			},
-			{
-				"command": "clusters.deleteEntry",
-				"title": "Delete"
-			},
-			{
-				"command": "astra.openSampleAppGallery",
-				"title": "Open Sample App Gallery"
-			},
-			{
-				"command": "astra.openPortal",
-				"title": "Open the Astra Portal"
-			},
-			{
-				"command": "astra.openDocumentation",
-				"title": "Open Astra Documentation"
-			},
-			{
-				"command": "astra.launchNodeExample",
-				"title": "Launch Node.js Example"
-			},
-			{
-				"command": "astra.launchPythonExample",
-				"title": "Launch Python Example"
-			}
-		]
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"format": "prettier --write .",
-		"publish": "vsce publish patch"
-	},
-	"devDependencies": {
-		"@types/mkdirp": "^1.0.1",
-		"@types/node": "^14.14.16",
-		"@types/rimraf": "^3.0.0",
-		"@types/vscode": "^1.52.0",
-		"@typescript-eslint/eslint-plugin": "^4.11.1",
-		"@typescript-eslint/parser": "^4.11.1",
-		"eslint": "^7.16.0",
-		"typescript": "^4.1.3"
-	},
-	"dependencies": {
-		"@types/request": "^2.48.5",
-		"cassandra-client": "^0.15.2",
-		"cassandra-driver": "^4.6.1",
-		"jsonc-parser": "^3.0.0",
-		"minimist": "^1.2.5",
-		"mkdirp": "^1.0.4",
-		"request": "^2.88.2",
-		"rimraf": "^3.0.2"
-	}
+  "name": "astra-for-vs-code",
+  "displayName": "Astra for VS Code (Beta)",
+  "description": "DataStax Astra Cassandra-as-a-Service: Open, multi-cloud stack for modern data apps",
+  "version": "0.2.5",
+  "publisher": "datastax",
+  "author": {
+    "name": "DataStax"
+  },
+  "galleryBanner": {
+    "color": "#43434d",
+    "theme": "dark"
+  },
+  "preview": true,
+  "icon": "logo.png",
+  "license": "MIT",
+  "repository": "https://github.com/alexleventer/astra-for-vscode",
+  "enableProposedApi": false,
+  "engines": {
+    "vscode": "^1.52.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "keywords": [
+    "cassandra",
+    "database",
+    "datastax astra"
+  ],
+  "activationEvents": [
+    "onView:clusters",
+    "onView:help",
+    "onWebviewPanel:astra"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsWelcome": [
+      {
+        "view": "clusters",
+        "contents": "No Astra connections.\n[Add Connection](command:astra.start)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "package-explorer",
+          "title": "DataStax Astra",
+          "icon": "media/datastax-square.svg"
+        }
+      ]
+    },
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "clusters.deleteEntry",
+          "when": "view == clusters && viewItem == cluster"
+        }
+      ]
+    },
+    "views": {
+      "package-explorer": [
+        {
+          "id": "clusters",
+          "name": "Clusters"
+        },
+        {
+          "id": "help",
+          "name": "Help"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "astra.start",
+        "title": "Start Astra for VS Code"
+      },
+      {
+        "command": "clusters.deleteEntry",
+        "title": "Delete"
+      },
+      {
+        "command": "astra.openSampleAppGallery",
+        "title": "Open Sample App Gallery"
+      },
+      {
+        "command": "astra.openPortal",
+        "title": "Open the Astra Portal"
+      },
+      {
+        "command": "astra.openDocumentation",
+        "title": "Open Astra Documentation"
+      },
+      {
+        "command": "astra.launchNodeExample",
+        "title": "Launch Node.js Example"
+      },
+      {
+        "command": "astra.launchPythonExample",
+        "title": "Launch Python Example"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "format": "prettier --write .",
+    "publish": "vsce publish patch"
+  },
+  "devDependencies": {
+    "@types/mkdirp": "^1.0.1",
+    "@types/node": "^14.14.16",
+    "@types/rimraf": "^3.0.0",
+    "@types/vscode": "^1.52.0",
+    "@typescript-eslint/eslint-plugin": "^4.11.1",
+    "@typescript-eslint/parser": "^4.11.1",
+    "eslint": "^7.16.0",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "@types/request": "^2.48.5",
+    "cassandra-client": "^0.15.2",
+    "cassandra-driver": "^4.6.1",
+    "jsonc-parser": "^3.0.0",
+    "minimist": "^1.2.5",
+    "mkdirp": "^1.0.4",
+    "prettier": "^2.2.1",
+    "request": "^2.88.2",
+    "rimraf": "^3.0.2"
+  }
 }

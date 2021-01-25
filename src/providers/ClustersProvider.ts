@@ -1,6 +1,6 @@
-import * as vscode from 'vscode';
-import { ThemeIcon } from 'vscode';
-import { listKeyspaces, listTables } from '../astra/dataApi';
+import * as vscode from "vscode";
+import { ThemeIcon } from "vscode";
+import { listKeyspaces, listTables } from "../astra/dataApi";
 
 export class ClustersProvider implements vscode.TreeDataProvider<any> {
   private outline: any;
@@ -12,58 +12,64 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
 
   async generateOutline() {
     const ignoreKeyspaces: string[] = [
-      'system',
-      'system_backups',
-      'system_distributed',
-      'system_auth',
-      'data_endpoint_auth',
-      'datastax_sla',
-      'system_traces',
+      "system",
+      "system_backups",
+      "system_distributed",
+      "system_auth",
+      "data_endpoint_auth",
+      "datastax_sla",
+      "system_traces",
     ];
     // Database
     const outline = [];
-    const context: any = this.context.globalState.get('astra');
+    const context: any = this.context.globalState.get("astra");
 
     if (this.token && context && context.id) {
       const keyspaces: any = await listKeyspaces(this.token, this.context);
 
-    outline.push({
-      label: context?.id,
-      contextValue: "cluster",
-      children: [],
-    });
+      outline.push({
+        label: context?.id,
+        contextValue: "cluster",
+        children: [],
+      });
 
-    for (const keyspace of keyspaces.data) {
-      if (!ignoreKeyspaces.includes(keyspace.name)) {
-        const tables: any = await listTables(this.token, keyspace.name, this.context);
+      for (const keyspace of keyspaces.data) {
+        if (!ignoreKeyspaces.includes(keyspace.name)) {
+          const tables: any = await listTables(
+            this.token,
+            keyspace.name,
+            this.context
+          );
 
-        // Tables
-        const tableOptions: any = await tables.map(table => {
-          return {
-            label: table,
-            iconPath: new ThemeIcon('split-horizontal'),
-            command: {
-              command: 'clusters.viewTable',
-              title: 'View Astra table',
-              arguments: [{
-                context: this.context,
-                keyspace: keyspace.name,
-                table: table,
-              }],
-            },
-            children: [],
-          }
-        });
+          // Tables
+          const tableOptions: any = await tables.map((table) => {
+            return {
+              label: table,
+              iconPath: new ThemeIcon("split-horizontal"),
+              command: {
+                command: "clusters.viewTable",
+                title: "View Astra table",
+                arguments: [
+                  {
+                    context: this.context,
+                    keyspace: keyspace.name,
+                    table: table,
+                  },
+                ],
+              },
+              children: [],
+            };
+          });
 
-        // Keyspace
-        // TODO: Only supports 1 db
-        outline[0].children.push({
-          label: keyspace.name,
-          children: tableOptions,
-          iconPath: new ThemeIcon('key'),
-        });
+          // Keyspace
+          // TODO: Only supports 1 db
+          outline[0].children.push({
+            label: keyspace.name,
+            children: tableOptions,
+            iconPath: new ThemeIcon("key"),
+          });
+        }
       }
-    }
     }
     return outline;
   }
@@ -78,7 +84,10 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
       resourceUri: item.resourceUri,
       tooltip: item.tooltip,
       contextValue: item.contextValue,
-      collapsibleState: item.children.length > 0 ? vscode.TreeItemCollapsibleState.Collapsed : vscode.TreeItemCollapsibleState.None
+      collapsibleState:
+        item.children.length > 0
+          ? vscode.TreeItemCollapsibleState.Collapsed
+          : vscode.TreeItemCollapsibleState.None,
     };
   }
 
@@ -90,6 +99,6 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
   }
 
   async refresh(): Promise<void> {
-    this.outline = await this.generateOutline()
+    this.outline = await this.generateOutline();
   }
 }

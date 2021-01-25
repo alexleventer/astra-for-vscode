@@ -1,9 +1,9 @@
-import * as vscode from 'vscode';
-import { getToken, searchTable } from '../astra/dataApi';
+import * as vscode from "vscode";
+import { getToken, searchTable } from "../astra/dataApi";
 
 export const ViewTableCommand = async (item) => {
-  const { keyspace, table, context} = item;
-  const { id, username, password, region } = context.globalState.get('astra');
+  const { keyspace, table, context } = item;
+  const { id, username, password, region } = context.globalState.get("astra");
 
   const label: string = `${keyspace}: ${table}`;
   const panel: vscode.WebviewPanel = vscode.window.createWebviewPanel(
@@ -15,15 +15,22 @@ export const ViewTableCommand = async (item) => {
   const { authToken } = await getToken(context);
   const rows = await searchTable(authToken, keyspace, table, context);
   panel.webview.html = webview(label, rows);
-}
+};
 
 const webview = (label: string, rows: any) => {
-  const header: string = `<tr>${Object.keys(rows[0]).map(col => `<td><b>${col}<b></td>`).join("")}</tr>`;
+  const header: string = `<tr>${Object.keys(rows[0])
+    .map((col) => `<td><b>${col}<b></td>`)
+    .join("")}</tr>`;
 
   let tableRows: string = "";
 
   for (let i = 1; i < rows.length; i++) {
-    tableRows += `<tr>${Object.values(rows[i]).map(col => `<td>${typeof col === 'object' ? JSON.stringify(col) : col }</td>`).join("")}</tr>`
+    tableRows += `<tr>${Object.values(rows[i])
+      .map(
+        (col) =>
+          `<td>${typeof col === "object" ? JSON.stringify(col) : col}</td>`
+      )
+      .join("")}</tr>`;
   }
 
   return `<!DOCTYPE html>
@@ -41,4 +48,4 @@ const webview = (label: string, rows: any) => {
     </table>
     </body>
     </html>`;
-}
+};
