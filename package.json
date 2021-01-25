@@ -104,7 +104,9 @@
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./"
+		"watch": "tsc -watch -p ./",
+		"format": "prettier --write .",
+		"publish": "vsce publish patch"
 	},
 	"devDependencies": {
 		"@types/mkdirp": "^1.0.1",
