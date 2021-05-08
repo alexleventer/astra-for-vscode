@@ -59,17 +59,17 @@
       function saveCreds() {
         const databaseId = document.getElementById("databaseId").value;
         const databaseRegion = document.getElementById("databaseRegion").value;
-        const databaseUsername = document.getElementById("databaseUsername")
+        const clientId = document.getElementById("clientId")
           .value;
-        const databasePassword = document.getElementById("databasePassword")
+        const clientSecret = document.getElementById("clientSecret")
           .value;
         vscode.postMessage({
           command: "credentials",
           body: {
             id: databaseId,
             region: databaseRegion,
-            username: databaseUsername,
-            password: databasePassword,
+            username: clientId,
+            password: clientSecret,
           },
         });
       }
@@ -98,15 +98,15 @@
       /><br />
       <input
         class="field"
-        id="databaseUsername"
+        id="clientId"
         type="text"
-        placeholder="Database Username"
+        placeholder="Client Id"
       /><br />
       <input
         class="field"
-        id="databasePassword"
+        id="clientSecret"
         type="password"
-        placeholder="Database Password"
+        placeholder="Client Secret"
       /><br />
       <button id="submit" onclick="saveCreds()">Connect</button>
     </div>
