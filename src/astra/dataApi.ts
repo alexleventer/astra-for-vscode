@@ -141,7 +141,7 @@ export const searchTable = async (
 ) => {
   const { id, region }: any = await context.globalState.get("astra");
   const { data }: any = await getTable(token, keyspaceName, tableName, context);
-  const pk = data.primaryKey.partitionKey[0];
+  const pk = data?.primaryKey?.partitionKey[0];
 
   return new Promise((resolve, reject) => {
     get(
