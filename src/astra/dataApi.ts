@@ -105,7 +105,7 @@ export const getIndexes = async (
       }
     );
   });
-}
+};
 
 export const getTable = async (
   token: string,
@@ -131,7 +131,7 @@ export const getTable = async (
       }
     );
   });
-}
+};
 
 export const searchTable = async (
   token: string,
@@ -147,10 +147,10 @@ export const searchTable = async (
     get(
       `https://${id}-${region}.apps.astra.datastax.com/api/rest/v2/keyspaces/${keyspaceName}/${tableName}?raw=true&where=${JSON.stringify(
         {
-          [pk]: {}
+          [pk]: {},
         }
-        )}`,
-        {
+      )}`,
+      {
         headers: {
           "X-Cassandra-Token": token,
           "content-type": "application/json",
