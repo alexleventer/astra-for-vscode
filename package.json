@@ -17,7 +17,7 @@
   "repository": "https://github.com/alexleventer/astra-for-vscode",
   "enableProposedApi": false,
   "engines": {
-    "vscode": "^1.56.0"
+    "vscode": "^1.63.1"
   },
   "categories": [
     "Programming Languages",
