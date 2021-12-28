@@ -158,10 +158,8 @@ export const searchTable = async (
       },
       (error, response, body) => {
         if (error) {
-          console.log(error);
           reject(error);
         }
-        console.log(body);
         resolve(JSON.parse(body));
       }
     );
