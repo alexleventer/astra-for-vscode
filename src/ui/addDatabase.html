@@ -59,10 +59,8 @@
       function saveCreds() {
         const databaseId = document.getElementById("databaseId").value;
         const databaseRegion = document.getElementById("databaseRegion").value;
-        const clientId = document.getElementById("clientId")
-          .value;
-        const clientSecret = document.getElementById("clientSecret")
-          .value;
+        const clientId = document.getElementById("clientId").value;
+        const clientSecret = document.getElementById("clientSecret").value;
         vscode.postMessage({
           command: "credentials",
           body: {

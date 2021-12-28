@@ -24,7 +24,7 @@ export class HelpProvider implements vscode.TreeDataProvider<any> {
         command: {
           command: "astra.openPortal",
         },
-      }
+      },
     ];
   }
 

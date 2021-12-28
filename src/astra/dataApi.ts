@@ -35,9 +35,8 @@ export const listKeyspaces = async (
   token: string,
   context: vscode.ExtensionContext
 ) => {
-  const { id, region, username, password }: any = context.globalState.get(
-    "astra"
-  );
+  const { id, region, username, password }: any =
+    context.globalState.get("astra");
   return new Promise((resolve, reject) => {
     get(
       `https://${id}-${region}.apps.astra.datastax.com/api/rest/v2/schemas/keyspaces`,
