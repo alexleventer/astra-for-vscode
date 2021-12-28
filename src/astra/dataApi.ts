@@ -15,9 +15,7 @@ export const getToken = async (
           "content-type": "application/json",
         },
         body: JSON.stringify({
-          // @ts-ignore
           username,
-          // @ts-ignore
           password,
         }),
       },
@@ -83,7 +81,7 @@ export const listTables = async (
   });
 };
 
-export const searchTable = async (
+export const getIndexes = async (
   token: string,
   keyspaceName: string,
   tableName: string,
@@ -92,10 +90,67 @@ export const searchTable = async (
   const { id, region }: any = await context.globalState.get("astra");
   return new Promise((resolve, reject) => {
     get(
-      `https://${id}-${region}.apps.astra.datastax.com/api/rest/v2/keyspaces/${keyspaceName}/${tableName}?raw=true&where=${JSON.stringify(
-        { $exists: {} }
-      )}`,
+      `https://${id}-${region}.apps.astra.datastax.com/api/rest/v2/keyspaces/${keyspaceName}/${tableName}/indexes`,
       {
+        headers: {
+          "X-Cassandra-Token": token,
+          "content-type": "application/json",
+        },
+      },
+      (error, response, body) => {
+        if (error) {
+          reject(error);
+        }
+        resolve(JSON.parse(body));
+      }
+    );
+  });
+}
+
+export const getTable = async (
+  token: string,
+  keyspaceName: string,
+  tableName: string,
+  context: vscode.ExtensionContext
+) => {
+  const { id, region }: any = await context.globalState.get("astra");
+  return new Promise((resolve, reject) => {
+    get(
+      `https://${id}-${region}.apps.astra.datastax.com/api/rest/v2/schemas/keyspaces/${keyspaceName}/tables/${tableName}`,
+      {
+        headers: {
+          "X-Cassandra-Token": token,
+          "content-type": "application/json",
+        },
+      },
+      (error, response, body) => {
+        if (error) {
+          reject(error);
+        }
+        resolve(JSON.parse(body));
+      }
+    );
+  });
+}
+
+export const searchTable = async (
+  token: string,
+  keyspaceName: string,
+  tableName: string,
+  context: vscode.ExtensionContext
+) => {
+  const { id, region }: any = await context.globalState.get("astra");
+  const { data }: any = await getTable(token, keyspaceName, tableName, context);
+  const pk = data?.primaryKey?.partitionKey[0];
+
+  return new Promise((resolve, reject) => {
+    get(
+      `https://${id}-${region}.apps.astra.datastax.com/api/rest/v2/keyspaces/${keyspaceName}/${tableName}?raw=true&where=${JSON.stringify(
+        {
+          [pk]: {}
+        }
+        )}`,
+        {
         headers: {
           "X-Cassandra-Token": token,
           "content-type": "application/json",
