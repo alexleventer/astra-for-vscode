@@ -23,24 +23,26 @@ export async function setUpTreeView(context: vscode.ExtensionContext) {
 export async function validateInput(body) {
   const errors = [];
   if (!body.id) {
-    errors.push("Missing database id.");
+    errors.push("database id");
   }
   if (!body.region) {
-    errors.push("Missing database region.");
+    errors.push("database region");
   }
 
   if (!body.username) {
-    errors.push("Missing database username.");
+    errors.push("database username");
   }
 
   if (!body.password) {
-    errors.push("Missing database password.");
+    errors.push("database password");
   }
 
   if (errors && errors.length === 0) {
     return true;
   }
-  vscode.window.showErrorMessage(`ERROR: ${errors.join("\n")}`);
+  vscode.window.showErrorMessage(
+    `Missing required fields: ${errors.join(", ")}`
+  );
   return false;
 }
 
