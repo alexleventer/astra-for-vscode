@@ -33,7 +33,7 @@ export const listKeyspaces = async (
   token: string,
   context: vscode.ExtensionContext
 ) => {
-  const { id, region, username, password }: any =
+  const { id, region }: any =
     context.globalState.get("astra");
   return new Promise((resolve, reject) => {
     get(
@@ -59,7 +59,7 @@ export const listTables = async (
   keyspaceName: string,
   context: vscode.ExtensionContext
 ) => {
-  const { id, region, username, password }: any = await context.globalState.get(
+  const { id, region }: any = await context.globalState.get(
     "astra"
   );
   return new Promise((resolve, reject) => {

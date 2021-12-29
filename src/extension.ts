@@ -7,7 +7,12 @@ import * as fs from "fs";
 import { ViewTableCommand } from "./commands/ViewTableCommand";
 
 export async function setUpTreeView(context: vscode.ExtensionContext) {
-  const { authToken }: any = await getToken(context);
+  const tokenResponse: any = await getToken(context).catch(async err => {
+    await context.globalState.update("astra", null);
+    vscode.window.showErrorMessage('The cluster credentials provided are invalid, please try again');
+    return;
+  });
+  const { authToken } = tokenResponse;
   const clusterProvider = new ClustersProvider(authToken, context);
   vscode.window.registerTreeDataProvider("clusters", clusterProvider);
   vscode.window.createTreeView("clusters", {
@@ -57,11 +62,6 @@ export async function activate(context: vscode.ExtensionContext) {
   }
 
   context.subscriptions.push(
-    vscode.commands.registerCommand("astra.openSampleAppGallery", async () =>
-      vscode.env.openExternal(
-        vscode.Uri.parse("https://www.datastax.com/examples")
-      )
-    ),
     vscode.commands.registerCommand("astra.openPortal", async () =>
       vscode.env.openExternal(vscode.Uri.parse("https://astra.datastax.com"))
     ),
@@ -94,7 +94,7 @@ export async function activate(context: vscode.ExtensionContext) {
         }
       });
       const filePath: vscode.Uri = vscode.Uri.file(
-        path.join(context.extensionPath, "src", "ui", "addDatabase.html")
+        path.join(context.extensionPath, "src", "ui", "addCluster.html")
       );
       panel.iconPath = vscode.Uri.file(
         path.join(context.extensionPath, "media", "astra-negative-square.png")

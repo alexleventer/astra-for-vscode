@@ -17,7 +17,7 @@ export const ConnectCommand = (context: vscode.ExtensionContext): any => {
     }
   });
   const filePath: vscode.Uri = vscode.Uri.file(
-    path.join(context.extensionPath, "src", "ui", "addDatabase.html")
+    path.join(context.extensionPath, "src", "ui", "addCluster.html")
   );
   panel.webview.html = fs.readFileSync(filePath.fsPath, "utf8");
 };

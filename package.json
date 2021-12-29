@@ -81,10 +81,6 @@
         "title": "Remove Cluster"
       },
       {
-        "command": "astra.openSampleAppGallery",
-        "title": "Open Sample App Gallery"
-      },
-      {
         "command": "astra.openPortal",
         "title": "Open the Astra Portal"
       },
