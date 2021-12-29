@@ -42,7 +42,7 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
           );
 
           // Tables
-          const tableOptions: any = await tables.map((table) => {
+          const tableOptions: any = await tables.map((table: string) => {
             return {
               label: table,
               iconPath: new ThemeIcon("split-horizontal"),
