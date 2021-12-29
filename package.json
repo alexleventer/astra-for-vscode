@@ -53,7 +53,7 @@
     "menus": {
       "view/item/context": [
         {
-          "command": "clusters.deleteEntry",
+          "command": "clusters.removeEntry",
           "when": "view == clusters && viewItem == cluster"
         }
       ]
@@ -76,8 +76,8 @@
         "title": "Start Astra for VS Code"
       },
       {
-        "command": "clusters.deleteEntry",
-        "title": "Delete"
+        "command": "clusters.removeEntry",
+        "title": "Remove Cluster"
       },
       {
         "command": "astra.openSampleAppGallery",

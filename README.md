@@ -1,4 +1,5 @@
 # Astra for VS Code
+
 DataStax Astra Cassandra-as-a-Service: Open, multi-cloud stack for modern data apps
 
 ## Local Development
