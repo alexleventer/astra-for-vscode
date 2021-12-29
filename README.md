@@ -17,3 +17,4 @@ DataStax Astra Cassandra-as-a-Service: Open, multi-cloud stack for modern data a
 
 1. Run `npm run publish`
 2. Paste in a personal access token (you can create a personal access token at dev.azure.com).
+3. Use GitHub CLI to tag a release in GitHub (example: `gh release create v0.3.7`)
