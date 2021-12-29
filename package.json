@@ -16,7 +16,7 @@
   "icon": "logo.png",
   "license": "MIT",
   "repository": "https://github.com/alexleventer/astra-for-vscode",
-  "enableProposedApi": false,
+  "enableApiProposals": false,
   "engines": {
     "vscode": "^1.63.1"
   },
