@@ -1,6 +1,6 @@
 {
   "name": "astra-for-vs-code",
-  "displayName": "Astra for VS Code (Beta)",
+  "displayName": "Astra for VS Code",
   "description": "DataStax Astra Cassandra-as-a-Service: Open, multi-cloud stack for modern data apps",
   "version": "0.3.3",
   "publisher": "datastax",

@@ -1,4 +1,7 @@
-# Astra for VS Code (Beta)
+# Astra for VS Code
+DataStax Astra Cassandra-as-a-Service: Open, multi-cloud stack for modern data apps
+
+## Local Development
 
 ### How to the run the extension locally
 
