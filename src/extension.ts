@@ -21,7 +21,6 @@ export async function setUpTreeView(context: vscode.ExtensionContext) {
   vscode.commands.registerCommand("clusters.viewTable", ViewTableCommand);
   vscode.commands.registerCommand("clusters.removeEntry", async (item) => {
     await context.globalState.update("astra", null);
-    await clusterProvider.refresh();
   });
 }
 

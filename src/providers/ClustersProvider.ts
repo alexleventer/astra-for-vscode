@@ -97,8 +97,4 @@ export class ClustersProvider implements vscode.TreeDataProvider<any> {
     }
     return Promise.resolve(this.outline);
   }
-
-  async refresh(): Promise<void> {
-    this.outline = await this.generateOutline();
-  }
 }
