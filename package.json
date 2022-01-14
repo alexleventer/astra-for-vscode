@@ -2,7 +2,7 @@
   "name": "astra-for-vs-code",
   "displayName": "Astra for VS Code",
   "description": "DataStax Astra Cassandra-as-a-Service: Open, multi-cloud stack for modern data apps",
-  "version": "0.3.92",
+  "version": "0.3.93",
   "publisher": "datastax",
   "homepage": "https://github.com/alexleventer/astra-for-vscode",
   "author": {
