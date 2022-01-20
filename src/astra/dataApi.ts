@@ -140,16 +140,10 @@ export const searchTable = async (
   context: vscode.ExtensionContext
 ) => {
   const { id, region }: any = await context.globalState.get("astra");
-  const { data }: any = await getTable(token, keyspaceName, tableName, context);
-  const pk = data?.primaryKey?.partitionKey[0];
 
   return new Promise((resolve, reject) => {
     get(
-      `https://${id}-${region}.apps.astra.datastax.com/api/rest/v2/keyspaces/${keyspaceName}/${tableName}?raw=true&where=${JSON.stringify(
-        {
-          [pk]: {},
-        }
-      )}`,
+      `https://${id}-${region}.apps.astra.datastax.com/api/rest/v2/keyspaces/${keyspaceName}/${tableName}/rows?raw=true`,
       {
         headers: {
           "X-Cassandra-Token": token,
